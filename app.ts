@@ -1,29 +1,25 @@
 import {Component, View, bootstrap, For} from 'angular2/angular2';
 
+import {Display} from 'display'
+
 @Component({
   selector: 'my-app'
 })
 @View({
-  template: `<p>Hello</p>
-  <ul>
-  <li *for="#name of names"><img src="http://{{ name }}.jpg.to/s" /></li>
-  </ul>
-  <input #nameentry (keyup)="addImage(nameentry.value, $event)" />
+  template: `
+  <display #disp></display>
+  <input #wordentry (keyup)="keyPress(wordentry.value, $event, disp)" />
   `,
-  directives: [For]
+  directives: [Display, For]
 })
 // Component Controller
 class MyAppComponent {
-  names: Array<string>;
-  nameentry: any;
-
   constructor() {
-    this.names = [];
   }
 
-  addImage(keyword: string, $event: KeyboardEvent) {
-    if($event.which == 32) {
-      this.names.push(keyword);
+  keyPress(keyword: string, $event: KeyboardEvent, disp: Display) {
+    if($event.which == 13) {
+      disp.addImage(keyword);
       (<HTMLInputElement>$event.target).value = "";
     }
   }
