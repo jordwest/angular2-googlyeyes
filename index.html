@@ -50,17 +50,21 @@ eye-app div.workspace img.base {
 eye-app div.eye {
   display: block;
   position: absolute;
-  border-radius: 15px;
+  border-radius: 30px;
+  overflow: hidden;
 }
 eye-app div.eye.white {
-  width: 30px;
-  height: 30px;
   background-color: white;
 }
 eye-app div.eye.ball {
-  width: 16px;
-  height: 16px;
+  background-color: #241d41;
+}
+
+eye-app div.eyelid {
+  display: block;
+  position: absolute;
   background-color: black;
+  transition: 0.1s; /* Animate the closing of the eyelid */
 }
 
 </style>

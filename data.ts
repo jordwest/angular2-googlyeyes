@@ -1,10 +1,9 @@
-import {Injectable} from 'angular2/di'
-
 interface Vector {
   x: number;
   y: number;
 }
 
+// This class represents an image with googly eyes
 export class DataStore {
   keyword: string = "barackobama";
   eyes : Array<Vector> = [];
@@ -14,9 +13,9 @@ export class DataStore {
   //                 /-keyword-\ /point_locations\
   validation = /^\#([A-Za-z_]+)(\[[\[\],\s\d]+\])$/;
 
-  constructor() {
-  }
+  constructor() { }
 
+  // Convert the encoded URL hash string into data
   deserialize(data: string) {
     var results = this.validation.exec(data);
     if(results === null) return;
@@ -28,6 +27,7 @@ export class DataStore {
     }
   }
 
+  // Convert the data into a URL hash string
   serialize() {
     var eyeArray = this.eyes.map((pos:Vector) => {
       return "[" + pos.x + "," + pos.y + "]";
@@ -36,11 +36,13 @@ export class DataStore {
     return this.keyword + "[" + eyeArray + "]";
   }
 
+  // Set the keyword used (clears the eyes)
   setKeyword(keyword: string) {
     this.eyes = [];
     this.keyword = keyword;
   }
 
+  // Add an eye
   addEye(x: number, y: number) {
     this.eyes.push({ x: x, y: y })
   }
