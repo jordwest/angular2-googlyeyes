@@ -3,16 +3,14 @@
   <title>Quickstart</title>
   <script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.87/traceur-runtime.js"></script>
   <script src="https://jspm.io/system@0.16.js"></script>
-  <script src="https://code.angularjs.org/2.0.0-alpha.23/angular2.dev.js"></script>
+  <script src="https://code.angularjs.org/2.0.0-alpha.22/angular2.dev.js"></script>
 </head>
 
 <style>
-body {
+eye-app {
   font-size: 20px;
   font-family: sans-serif;
-}
 
-my-app {
   width: 300px;
   display: block;
   margin: 0px auto;
@@ -22,11 +20,11 @@ my-app {
   text-align: center;
 }
 
-my-app label{
+eye-app label{
   margin-top: 15px;
   display: block;
 }
-my-app input {
+eye-app input {
   width: 100%;
   margin-top: 5px;
   font-size: 24px;
@@ -37,29 +35,29 @@ my-app input {
   border-bottom: 2px solid #999;
 }
 
-div.workspace {
+eye-app div.workspace {
   position: relative;
   margin: 0;
   padding: 0;
 }
 
-div.workspace img.base {
+eye-app div.workspace img.base {
   width: 300px;
   height: auto;
   display: block;
 }
 
-div.eye {
+eye-app div.eye {
   display: block;
   position: absolute;
   border-radius: 15px;
 }
-div.eye.white {
+eye-app div.eye.white {
   width: 30px;
   height: 30px;
   background-color: white;
 }
-div.eye.ball {
+eye-app div.eye.ball {
   width: 16px;
   height: 16px;
   background-color: black;
@@ -69,7 +67,7 @@ div.eye.ball {
 
 <body>
 
-  <my-app></my-app>
+  <eye-app></eye-app>
   <script>
     System.import('app');
   </script>

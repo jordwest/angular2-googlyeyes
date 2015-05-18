@@ -1,10 +1,11 @@
+import {Injectable} from 'angular2/di'
 
 interface Vector {
   x: number;
   y: number;
 }
 
-class DataStore {
+export class DataStore {
   keyword: string = "barackobama";
   eyes : Array<Vector> = [];
 
@@ -13,8 +14,7 @@ class DataStore {
   //                 /-keyword-\ /point_locations\
   validation = /^\#([A-Za-z_]+)(\[[\[\],\s\d]+\])$/;
 
-  constructor(initialData: string) {
-    this.deserialize(initialData);
+  constructor() {
   }
 
   deserialize(data: string) {

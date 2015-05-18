@@ -1,10 +1,10 @@
 import {Component, View, bootstrap, For} from 'angular2/angular2';
 
 import {DataStore} from 'data'
-import {Eye} from 'display'
+import {Eye} from 'eye'
 
 @Component({
-  selector: 'my-app'
+  selector: 'eye-app',
 })
 @View({
   template: `
@@ -18,14 +18,14 @@ import {Eye} from 'display'
   `,
   directives: [Eye, For]
 })
-// Component Controller
-class MyAppComponent {
+class EyeAppComponent {
   dataStore: DataStore;
   focusX: number = 0;
   focusY: number = 0;
 
   constructor() {
-    this.dataStore = new DataStore(window.location.hash);
+    this.dataStore = new DataStore();
+    this.dataStore.deserialize(window.location.hash);
   }
 
   updateFocalPoint($event: MouseEvent) {
@@ -45,4 +45,4 @@ class MyAppComponent {
 }
 
 
-bootstrap(MyAppComponent);
+bootstrap(EyeAppComponent);
