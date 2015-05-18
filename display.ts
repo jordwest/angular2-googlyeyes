@@ -1,28 +1,46 @@
 import {Component, View, For} from 'angular2/angular2';
-import {Sprite} from 'sprite';
 
 @Component({
-  selector: 'display'
+  selector: 'eye',
+  properties: {
+    'x': 'x',
+    'y': 'y',
+    'focusX': 'focusx',
+    'focusY': 'focusy'
+  }
 })
 @View({
   template: `
-  <div *for="#sprite of sprites">
-    <sprite [target-x]="sprite.x" [target-y]="sprite.y" [keyword]="sprite.keyword" />
-  </div>
+  <div class="eye white" [style.left]="x-15" [style.top]="y-15"></div>
+  <div class="eye ball" [style.left]="getBallX()-8" [style.top]="getBallY()-8"></div>
   `,
-  directives: [Sprite, For]
+  directives: [For]
 })
-export class Display {
-  sprites: Array<any> = [];
+export class Eye {
+  x: number;
+  y: number;
+
+  focusX: number;
+  focusY: number;
 
   constructor() {
   }
 
-  addImage(keyword: string) {
-    this.sprites.push({
-      x: Math.random()*400,
-      y: Math.random()*400,
-      keyword: keyword});
-    console.log(this.sprites);
+  angleToCursor() {
+    return Math.atan2(this.yDiff(), this.xDiff());
+  }
+  xDiff() {
+    return this.focusX - this.x;
+  }
+  yDiff() {
+    return this.focusY - this.y;
+  }
+
+  getBallX() {
+    return this.x + Math.cos(this.angleToCursor())*5;
+  }
+
+  getBallY() {
+    return this.y + Math.sin(this.angleToCursor())*5;
   }
 }

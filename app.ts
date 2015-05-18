@@ -1,28 +1,48 @@
 import {Component, View, bootstrap, For} from 'angular2/angular2';
 
-import {Display} from 'display'
+import {DataStore} from 'data'
+import {Eye} from 'display'
 
 @Component({
   selector: 'my-app'
 })
 @View({
   template: `
-  <display #disp></display>
-  <input #wordentry (keyup)="keyPress(wordentry.value, $event, disp)" />
+    <div class="workspace">
+      <img class="base" #image src="http://{{ dataStore.keyword }}.jpg.to" (mousemove)="updateFocalPoint($event)" (click)="addEyes($event)"/>
+      <eye *for="#eye of dataStore.eyes" [x]="eye.x" [y]="eye.y" [focusx]="focusX" [focusy]="focusY"></eye>
+    </div>
+
+    <label for="wordentry">A picture of</label>
+    <input id="wordentry" #wordentry value="{{ dataStore.keyword }}" (keyup)="setKeyword(wordentry.value)" />
   `,
-  directives: [Display, For]
+  directives: [Eye, For]
 })
 // Component Controller
 class MyAppComponent {
+  dataStore: DataStore;
+  focusX: number = 0;
+  focusY: number = 0;
+
   constructor() {
+    this.dataStore = new DataStore(window.location.hash);
   }
 
-  keyPress(keyword: string, $event: KeyboardEvent, disp: Display) {
-    if($event.which == 13) {
-      disp.addImage(keyword);
-      (<HTMLInputElement>$event.target).value = "";
-    }
+  updateFocalPoint($event: MouseEvent) {
+    this.focusX = $event.offsetX;
+    this.focusY = $event.offsetY;
+  }
+
+  setKeyword(keyword:string) {
+    this.dataStore.setKeyword(keyword);
+    window.location.hash = this.dataStore.serialize();
+  }
+
+  addEyes($event: MouseEvent) {
+    this.dataStore.addEye($event.offsetX, $event.offsetY);
+    window.location.hash = this.dataStore.serialize();
   }
 }
+
 
 bootstrap(MyAppComponent);

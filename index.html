@@ -3,28 +3,66 @@
   <title>Quickstart</title>
   <script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.87/traceur-runtime.js"></script>
   <script src="https://jspm.io/system@0.16.js"></script>
-  <script src="https://code.angularjs.org/2.0.0-alpha.22/angular2.dev.js"></script>
+  <script src="https://code.angularjs.org/2.0.0-alpha.23/angular2.dev.js"></script>
 </head>
 
 <style>
-ul {
-  list-style-type: none;
+body {
+  font-size: 20px;
+  font-family: sans-serif;
 }
 
-li {
-  display: inline;
-  width: 100px;
-  overflow: hidden;
-  min-height: 50px;
+my-app {
+  width: 300px;
+  display: block;
+  margin: 0px auto;
+  border: 2px solid #365db1;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
 }
 
-img.sprite {
-  max-width: 100px;
+my-app label{
+  margin-top: 15px;
+  display: block;
+}
+my-app input {
+  width: 100%;
+  margin-top: 5px;
+  font-size: 24px;
+
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #999;
+}
+
+div.workspace {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+div.workspace img.base {
+  width: 300px;
   height: auto;
   display: block;
-  position: fixed;
+}
 
-  border-radius: 20px;
+div.eye {
+  display: block;
+  position: absolute;
+  border-radius: 15px;
+}
+div.eye.white {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+}
+div.eye.ball {
+  width: 16px;
+  height: 16px;
+  background-color: black;
 }
 
 </style>
