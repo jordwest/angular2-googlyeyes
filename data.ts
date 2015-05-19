@@ -5,19 +5,19 @@ interface Vector {
 
 // This class represents an image with googly eyes
 export class DataStore {
-  keyword: string = "barackobama";
-  eyes : Array<Vector> = [];
+  keyword: string = "dog";
+  eyes : Array<Vector> = [{x: 123, y: 63}, {x: 156, y: 58}];
 
   // RegExp to validate that the supplied serial data is in the format
   // #keyword[[x,y],[x,y]]
   //                 /-keyword-\ /point_locations\
-  validation = /^\#([A-Za-z_]+)(\[[\[\],\s\d]+\])$/;
+  validation = /^\#([A-Za-z_\s]+)(\[[\[\],\s\d]+\])$/;
 
   constructor() { }
 
   // Convert the encoded URL hash string into data
   deserialize(data: string) {
-    var results = this.validation.exec(data);
+    var results = this.validation.exec(decodeURIComponent(data));
     if(results === null) return;
 
     this.setKeyword(results[1])
@@ -33,7 +33,7 @@ export class DataStore {
       return "[" + pos.x + "," + pos.y + "]";
     }).join(",");
 
-    return this.keyword + "[" + eyeArray + "]";
+    return encodeURIComponent(this.keyword + "[" + eyeArray + "]");
   }
 
   // Set the keyword used (clears the eyes)

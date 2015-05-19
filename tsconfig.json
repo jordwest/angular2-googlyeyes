@@ -18,7 +18,6 @@
         "./app.ts",
         "./data.ts",
         "./eye.ts",
-        "./sprite.ts",
         "./typings/angular2/angular2.d.ts"
     ]
 }

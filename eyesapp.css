@@ -1,0 +1,70 @@
+body {
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+h1 {
+  font-family: 'Comic Sans MS';
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+eye-app {
+  width: 300px;
+  display: block;
+  margin: 0px auto;
+  border: 2px solid #365db1;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+}
+
+eye-app label{
+  margin-top: 15px;
+  display: block;
+}
+eye-app input {
+  width: 100%;
+  margin-top: 5px;
+  font-size: 24px;
+
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #999;
+}
+
+eye-app div.workspace {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+eye-app div.workspace img.base {
+  width: 300px;
+  height: auto;
+  display: block;
+}
+
+eye-app div.eye {
+  display: block;
+  position: absolute;
+  border-radius: 30px;
+  overflow: hidden;
+}
+eye-app div.eye.white {
+  background-color: white;
+}
+eye-app div.eye.ball {
+  background-color: #241d41;
+}
+
+eye-app div.eyelid {
+  display: block;
+  position: absolute;
+  background-color: black;
+  transition: 0.1s; /* Animate the closing of the eyelid */
+}

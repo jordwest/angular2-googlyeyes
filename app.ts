@@ -31,9 +31,9 @@ class EyeAppComponent {
     this.dataStore = new DataStore();
     this.dataStore.deserialize(window.location.hash);
 
-    setInterval(() => {
+    setTimeout(() => {
       this.blink();
-    }, 3000)
+    }, 4000)
   }
 
   // Update the point at which the eyes are looking
@@ -61,6 +61,11 @@ class EyeAppComponent {
     setTimeout(() => {
       this.blinking = 0;
     }, 100)
+
+    // Blink again somewhere between 0.5 - 3.5 seconds later
+    setTimeout(() => {
+      this.blink();
+    }, 500 + Math.floor(Math.random()*3000))
   }
 }
 
