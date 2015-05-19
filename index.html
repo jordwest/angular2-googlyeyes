@@ -1,79 +1,26 @@
 <html>
 <head>
-  <title>Quickstart</title>
+  <title>Angular 2 Googly Eyes</title>
   <script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.87/traceur-runtime.js"></script>
   <script src="https://jspm.io/system@0.16.js"></script>
   <script src="https://code.angularjs.org/2.0.0-alpha.22/angular2.dev.js"></script>
+  <link rel="stylesheet" type="text/css" href="eyesapp.css" />
 </head>
 
-<style>
-eye-app {
-  font-size: 20px;
-  font-family: sans-serif;
-
-  width: 300px;
-  display: block;
-  margin: 0px auto;
-  border: 2px solid #365db1;
-  border-radius: 5px;
-  padding: 15px;
-  text-align: center;
-}
-
-eye-app label{
-  margin-top: 15px;
-  display: block;
-}
-eye-app input {
-  width: 100%;
-  margin-top: 5px;
-  font-size: 24px;
-
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid #999;
-}
-
-eye-app div.workspace {
-  position: relative;
-  margin: 0;
-  padding: 0;
-}
-
-eye-app div.workspace img.base {
-  width: 300px;
-  height: auto;
-  display: block;
-}
-
-eye-app div.eye {
-  display: block;
-  position: absolute;
-  border-radius: 30px;
-  overflow: hidden;
-}
-eye-app div.eye.white {
-  background-color: white;
-}
-eye-app div.eye.ball {
-  background-color: #241d41;
-}
-
-eye-app div.eyelid {
-  display: block;
-  position: absolute;
-  background-color: black;
-  transition: 0.1s; /* Animate the closing of the eyelid */
-}
-
-</style>
-
 <body>
+
+<h1>Angular 2 Googly Eyes</h1>
 
   <eye-app></eye-app>
   <script>
     System.import('app');
   </script>
+
+  <p class="description">
+  This is a test of Angular 2 Alpha.</p>
+  <p>See my <a href="/post/2015/05/19-angular-2-first-impressions/">first impressions using
+  Angular 2 Alpha</a> or <a href="https://www.github.com/jordwest/angular2-googlyeyes">download
+  the source code here</a>
+  </p>
 </body>
 </html>
