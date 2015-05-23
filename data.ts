@@ -17,7 +17,6 @@ export class DataStore {
 
   // Convert the encoded URL hash string into data
   deserialize(data: string) {
-    console.log(this.validation.exec(decodeURIComponent(data)));
     var results = this.validation.exec(decodeURIComponent(data));
     if(results === null) return;
 
