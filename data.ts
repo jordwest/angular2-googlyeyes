@@ -5,22 +5,23 @@ interface Vector {
 
 // This class represents an image with googly eyes
 export class DataStore {
-  keyword: string = "dog";
-  eyes : Array<Vector> = [{x: 123, y: 63}, {x: 156, y: 58}];
+  imgur_id: string = "sjpa0Gg";
+  eyes : Array<Vector> = [{x: 119, y: 156}, {x: 202, y: 156}];
 
   // RegExp to validate that the supplied serial data is in the format
-  // #keyword[[x,y],[x,y]]
-  //                 /-keyword-\ /point_locations\
-  validation = /^\#([A-Za-z_\s]+)(\[[\[\],\s\d]+\])$/;
+  // #imgur_id[[x,y],[x,y]]
+  //                 /-imgur_id-\ /point_locations\
+  validation = /^\#([A-Za-z\d]{7})(\[[\[\],\s\d]*\])$/;
 
   constructor() { }
 
   // Convert the encoded URL hash string into data
   deserialize(data: string) {
+    console.log(this.validation.exec(decodeURIComponent(data)));
     var results = this.validation.exec(decodeURIComponent(data));
     if(results === null) return;
 
-    this.setKeyword(results[1])
+    this.setImgurID(results[1])
     var eyeLocations = JSON.parse(results[2]);
     for(var i = 0; i < eyeLocations.length; i++) {
       this.addEye(eyeLocations[i][0], eyeLocations[i][1]);
@@ -33,13 +34,13 @@ export class DataStore {
       return "[" + pos.x + "," + pos.y + "]";
     }).join(",");
 
-    return encodeURIComponent(this.keyword + "[" + eyeArray + "]");
+    return encodeURIComponent(this.imgur_id + "[" + eyeArray + "]");
   }
 
-  // Set the keyword used (clears the eyes)
-  setKeyword(keyword: string) {
+  // Set the imgur_id used (clears the eyes)
+  setImgurID(imgur_id: string) {
     this.eyes = [];
-    this.keyword = keyword;
+    this.imgur_id = imgur_id;
   }
 
   // Add an eye

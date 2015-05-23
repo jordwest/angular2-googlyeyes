@@ -8,13 +8,15 @@ import {Eye} from 'eye'
 })
 @View({
   template: `
+    <p>
+      <input id="wordentry" #wordentry (keyup)="setImage(wordentry.value)" placeholder="Paste imgur URL or ID here" />
+    </p>
     <div class="workspace">
-      <img class="base" #image src="http://{{ dataStore.keyword }}.jpg.to" (mousemove)="setFocalPoint($event)" (click)="click($event)"/>
+      <img class="base" #image src="http://i.imgur.com/{{ dataStore.imgur_id }}.jpg" (mousemove)="setFocalPoint($event)" (click)="click($event)"/>
       <eye *for="#eye of dataStore.eyes" [x]="eye.x" [y]="eye.y" [focusx]="focusX" [focusy]="focusY" [eyelid-pos]="blinking"></eye>
     </div>
 
-    <label for="wordentry">A picture of</label>
-    <input id="wordentry" #wordentry value="{{ dataStore.keyword }}" (keyup)="setKeyword(wordentry.value)" />
+    <p><a href="https://imgur.com/{{ dataStore.imgur_id }}">View original on imgur</a></p>
   `,
   directives: [Eye, For]
 })
@@ -23,6 +25,7 @@ class EyeAppComponent {
   focusX: number = 0;
   focusY: number = 0;
   blinking: number = 0;
+  imgurRE = /^(?:(?:https?\:\/\/)?(?:i\.|www)?imgur.com(?:\/gallery)?\/)?([A-Za-z\d]{7})/
 
   // Should be using dependency injection here, but couldn't get it to work
   // ie, constructor(dataStore: DataStore) should have Angular instantiate
@@ -42,10 +45,12 @@ class EyeAppComponent {
     this.focusY = $event.layerY;
   }
 
-  // Set the keyword used for the image search
-  setKeyword(keyword:string) {
-    this.dataStore.setKeyword(keyword);
-    window.location.hash = this.dataStore.serialize();
+  // Set the imgur id used for the image search
+  setImage(url:string) {
+    if (this.imgurRE.test(url)) {
+      this.dataStore.setImgurID(this.imgurRE.exec(url)[1]);
+      window.location.hash = this.dataStore.serialize();
+    }
   }
 
   // Add an eye to the image
