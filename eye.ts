@@ -1,20 +1,19 @@
 import {Component, View, For} from 'angular2/angular2';
+import {Vector} from 'data'
 
 @Component({
   selector: 'eye',
   properties: {
-    'x': 'x',
-    'y': 'y',
-    'focusX': 'focusx',
-    'focusY': 'focusy',
+    'position': 'position',
+    'focalPoint': 'focus',
     'eyelidPos': 'eyelid-pos'
   }
 })
 @View({
   template: `
   <div class="eye white"
-    [style.left]="x - (eyeDiameter/2)"
-    [style.top]="y - (eyeDiameter/2)"
+    [style.left]="position.x - (eyeDiameter/2)"
+    [style.top]="position.y - (eyeDiameter/2)"
     [style.width]="eyeDiameter"
     [style.height]="eyeDiameter">
 
@@ -39,11 +38,9 @@ import {Component, View, For} from 'angular2/angular2';
 // Provide the location of the eye and the location they should focus on
 // using the x, y, focusy, focusy properties.
 export class Eye {
-  x: number;
-  y: number;
 
-  focusX: number;
-  focusY: number;
+  position: Vector;
+  focalPoint: Vector;
 
   eyeDiameter: number = 30;
   eyeBallDiameter: number = 16;
@@ -59,11 +56,11 @@ export class Eye {
 
   // Horizontal distance from eye to focal point
   xDiff() {
-    return this.focusX - this.x;
+    return this.focalPoint.x - this.position.x;
   }
   // Vertical distance from eye to focal point
   yDiff() {
-    return this.focusY - this.y;
+    return this.focalPoint.y - this.position.y;
   }
 
   getBallX() {

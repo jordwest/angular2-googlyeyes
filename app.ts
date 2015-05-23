@@ -1,6 +1,6 @@
 import {Component, View, bootstrap, For} from 'angular2/angular2';
 
-import {DataStore} from 'data'
+import {DataStore, Vector} from 'data'
 import {Eye} from 'eye'
 
 @Component({
@@ -13,7 +13,7 @@ import {Eye} from 'eye'
     </p>
     <div class="workspace">
       <img class="base" #image src="http://i.imgur.com/{{ dataStore.imgur_id }}.jpg" (mousemove)="setFocalPoint($event)" (click)="click($event)"/>
-      <eye *for="#eye of dataStore.eyes" [x]="eye.x" [y]="eye.y" [focusx]="focusX" [focusy]="focusY" [eyelid-pos]="blinking"></eye>
+      <eye *for="#eye of dataStore.eyes" [position]="eye" [focus]="focalPoint" [eyelid-pos]="blinking"></eye>
     </div>
 
     <p><a href="https://imgur.com/{{ dataStore.imgur_id }}">View original on imgur</a></p>
@@ -22,8 +22,7 @@ import {Eye} from 'eye'
 })
 class EyeAppComponent {
   dataStore: DataStore;
-  focusX: number = 0;
-  focusY: number = 0;
+  focalPoint: Vector = {x: 0, y: 0};
   blinking: number = 0;
   imgurRE = /^(?:(?:https?\:\/\/)?(?:i\.|www)?imgur.com(?:\/gallery)?\/)?([A-Za-z\d]{7})/
 
@@ -41,8 +40,8 @@ class EyeAppComponent {
 
   // Update the point at which the eyes are looking
   setFocalPoint($event: MouseEvent) {
-    this.focusX = $event.layerX;
-    this.focusY = $event.layerY;
+    this.focalPoint.x = $event.layerX;
+    this.focalPoint.y = $event.layerY;
   }
 
   // Set the imgur id used for the image search
